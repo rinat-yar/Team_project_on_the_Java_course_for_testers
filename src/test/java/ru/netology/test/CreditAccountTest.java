@@ -58,17 +58,19 @@ public class CreditAccountTest {
         Assertions.assertEquals(0, account.getBalance());
     }
 
+
+
     @Test
     public void shouldAddToMoreCreditLimitWhenBalanceGreaterZero() {
         CreditAccount account = new CreditAccount(
-                1000,
+                4_000,
                 5_000,
                 15
         );
 
-        account.add(6_000);
+        account.add(3_000);
 
-        Assertions.assertEquals(1000, account.getBalance());
+        Assertions.assertEquals(4_000, account.getBalance());
     }
 
     @Test
