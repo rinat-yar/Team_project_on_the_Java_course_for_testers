@@ -7,6 +7,18 @@ import ru.netology.CreditAccount;
 public class CreditAccountTest {
 
     @Test
+    public void shouldCreditAccount() {
+        CreditAccount account = new CreditAccount(
+                6_000,
+                5_000,
+                15
+        );
+
+        Assertions.assertEquals(5_000, account.getBalance());
+    }
+
+
+    @Test
     public void shouldAddToPositiveBalance() {
         CreditAccount account = new CreditAccount(
                 0,
@@ -58,21 +70,6 @@ public class CreditAccountTest {
         Assertions.assertEquals(0, account.getBalance());
     }
 
-
-
-    @Test
-    public void shouldAddToMoreCreditLimitWhenBalanceGreaterZero() {
-        CreditAccount account = new CreditAccount(
-                4_000,
-                5_000,
-                15
-        );
-
-        account.add(3_000);
-
-        Assertions.assertEquals(4_000, account.getBalance());
-    }
-
     @Test
     public void shouldAddToPositiveMoneyWhenBalanceGreaterZero() {
         CreditAccount account = new CreditAccount(
@@ -113,61 +110,6 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldNegativeInitialBalance() {
-        CreditAccount account = new CreditAccount(
-                -1000,
-                5_000,
-                15
-        );
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
-    @Test
-    public void shouldZeroInitialBalance() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
-    @Test
-    public void shouldPositiveInitialBalance() {
-        CreditAccount account = new CreditAccount(
-                1000,
-                5_000,
-                15
-        );
-
-        Assertions.assertEquals(1000, account.getBalance());
-    }
-
-    @Test
-    public void shouldBalanceLessCreditLimit() {
-        CreditAccount account = new CreditAccount(
-                -10000,
-                5_000,
-                15
-        );
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
-    @Test
-    public void shouldBalanceGreaterCreditLimit() {
-        CreditAccount account = new CreditAccount(
-                10000,
-                5_000,
-                15
-        );
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
-    @Test
     public void shouldPositiveCreditLimit() {
         CreditAccount account = new CreditAccount(
                 0,
@@ -190,14 +132,36 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldNegativeCreditLimit() {
-        CreditAccount account = new CreditAccount(
-                0,
-                -5_000,
-                15
-        );
+    public void shouldNegativeBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(
+                    -5_000,
+                    5_000,
+                    15
+            );
+        });
+    }
 
-        Assertions.assertEquals(0, account.getCreditLimit());
+    @Test
+    public void shouldNegativeCreditLimit() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(
+                    5_000,
+                    -5_000,
+                    15
+            );
+        });
+    }
+
+    @Test
+    public void shouldNegativeRate() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(
+                    5_000,
+                    5_000,
+                    -15
+            );
+        });
     }
 
     @Test
@@ -270,6 +234,15 @@ public class CreditAccountTest {
         account.yearChange();
 
         Assertions.assertEquals(0, account.yearChange());
+    }
+
+    @Test
+    public void TEST() {
+        CreditAccount account = new CreditAccount(
+                0,
+                5_000,
+                -15
+        );
     }
 
 }
