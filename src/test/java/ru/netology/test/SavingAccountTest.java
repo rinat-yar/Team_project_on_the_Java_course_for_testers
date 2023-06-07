@@ -180,4 +180,79 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(2_100, account.yearChange());
     }
+
+    @Test
+    public void testPayMinBalance() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+
+        boolean result = account.pay(1_000);
+
+        Assertions.assertTrue(result);
+        Assertions.assertEquals(1000, account.getBalance());
+    }
+
+    @Test
+    public void testPayBalance() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+
+        boolean result = account.pay(500);
+
+        Assertions.assertTrue(result);
+        Assertions.assertEquals(1500, account.getBalance());
+    }
+
+    @Test
+    public void testPayBalance_1() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+
+        boolean result = account.pay(2000);
+
+        Assertions.assertTrue(result);
+        Assertions.assertEquals(0, account.getBalance());
+    }
+
+
+    @Test
+    public void testNegativeValues() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                    SavingAccount account = new SavingAccount(
+                            -2_000,
+                            -1_000,
+                            -10_000,
+                            -5
+                    );
+                }
+        );
+
+    }
+
+    @Test //++ граничные значения, на 1 больше минимума
+    public void testPayNegative() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+
+        account.pay(4000);
+
+        Assertions.assertEquals(2000, account.getBalance());
+    }
+
 }
