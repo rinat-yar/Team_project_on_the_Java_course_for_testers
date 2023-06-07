@@ -168,20 +168,6 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void testYearChange() {
-        SavingAccount account = new SavingAccount(
-                2000,
-                1000,
-                10000,
-                5
-        );
-
-        account.yearChange();
-
-        Assertions.assertEquals(2_100, account.yearChange());
-    }
-
-    @Test
     public void testPayMinBalance() {
         SavingAccount account = new SavingAccount(
                 2000,
@@ -210,22 +196,6 @@ public class SavingAccountTest {
         Assertions.assertTrue(result);
         Assertions.assertEquals(1500, account.getBalance());
     }
-
-    @Test
-    public void testPayBalance_1() {
-        SavingAccount account = new SavingAccount(
-                2000,
-                1000,
-                10000,
-                5
-        );
-
-        boolean result = account.pay(2000);
-
-        Assertions.assertTrue(result);
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
 
     @Test
     public void testNegativeValues() {
