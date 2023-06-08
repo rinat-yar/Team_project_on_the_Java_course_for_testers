@@ -235,14 +235,4 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
-
-    @Test
-    public void TEST() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                -15
-        );
-    }
-
 }
