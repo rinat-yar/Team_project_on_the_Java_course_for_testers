@@ -18,7 +18,7 @@ public class SavingAccountTest {
         account.add(3000);
 
         Assertions.assertEquals(5000, account.getBalance());
-    }
+    } 
 
     @Test
     public void testNegativeValuesInitialBalanceMin() {
@@ -310,5 +310,4 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(300, account.yearChange());
     }
-
 }
