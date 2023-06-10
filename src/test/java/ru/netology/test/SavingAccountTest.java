@@ -34,6 +34,8 @@ public class SavingAccountTest {
 
     }
 
+
+
     @Test
     public void testNegativeValuesInitialBalanceMax() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -41,7 +43,7 @@ public class SavingAccountTest {
                             10001,
                             1000,
                             10000,
-                            -5
+                            5
                     );
                 }
         );
