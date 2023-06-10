@@ -7,7 +7,7 @@ import ru.netology.SavingAccount;
 public class SavingAccountTest {
 
     @Test
-    public void shouldAddLessThanMaxBalance() {
+    public void testAddLessThanMaxBalance() {
         SavingAccount account = new SavingAccount(
                 2000,
                 1000,
