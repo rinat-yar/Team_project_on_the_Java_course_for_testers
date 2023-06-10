@@ -4,17 +4,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.CreditAccount;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class CreditAccountTest {
 
     @Test
     public void shouldCreditAccount() {
-        CreditAccount account = new CreditAccount(
-                6_000,
-                5_000,
-                15
-        );
+        try {
+            CreditAccount account = new CreditAccount(
+                    6_000,
+                    5_000,
+                    15
+            );
+            Assertions.fail("IllegalArgumentException not thrown");
+        } catch (IllegalArgumentException expected) {
 
-        Assertions.assertEquals(5_000, account.getBalance());
+        }
     }
 
 
@@ -28,7 +34,7 @@ public class CreditAccountTest {
 
         account.add(3_000);
 
-        Assertions.assertEquals(3_000, account.getBalance());
+        assertEquals(3_000, account.getBalance());
     }
 
     @Test
@@ -41,7 +47,7 @@ public class CreditAccountTest {
 
         account.add(0);
 
-        Assertions.assertEquals(0, account.getBalance());
+        assertEquals(0, account.getBalance());
     }
 
     @Test
@@ -54,7 +60,7 @@ public class CreditAccountTest {
 
         account.add(-3_000);
 
-        Assertions.assertEquals(0, account.getBalance());
+        assertEquals(0, account.getBalance());
     }
 
     @Test
@@ -67,7 +73,7 @@ public class CreditAccountTest {
 
         account.add(6_000);
 
-        Assertions.assertEquals(0, account.getBalance());
+        assertEquals(6000, account.getBalance());
     }
 
     @Test
@@ -80,7 +86,7 @@ public class CreditAccountTest {
 
         account.add(3_000);
 
-        Assertions.assertEquals(4000, account.getBalance());
+        assertEquals(4000, account.getBalance());
     }
 
     @Test
@@ -93,7 +99,7 @@ public class CreditAccountTest {
 
         account.add(-3_000);
 
-        Assertions.assertEquals(1000, account.getBalance());
+        assertEquals(1000, account.getBalance());
     }
 
     @Test
@@ -106,7 +112,7 @@ public class CreditAccountTest {
 
         account.add(0);
 
-        Assertions.assertEquals(1_000, account.getBalance());
+        assertEquals(1_000, account.getBalance());
     }
 
     @Test
@@ -117,7 +123,7 @@ public class CreditAccountTest {
                 15
         );
 
-        Assertions.assertEquals(5000, account.getCreditLimit());
+        assertEquals(5000, account.getCreditLimit());
     }
 
     @Test
@@ -128,12 +134,12 @@ public class CreditAccountTest {
                 15
         );
 
-        Assertions.assertEquals(0, account.getCreditLimit());
+        assertEquals(0, account.getCreditLimit());
     }
 
     @Test
     public void shouldNegativeBalance() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
                     -5_000,
                     5_000,
@@ -144,7 +150,7 @@ public class CreditAccountTest {
 
     @Test
     public void shouldNegativeCreditLimit() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
                     5_000,
                     -5_000,
@@ -155,7 +161,7 @@ public class CreditAccountTest {
 
     @Test
     public void shouldNegativeRate() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
                     5_000,
                     5_000,
@@ -173,7 +179,7 @@ public class CreditAccountTest {
         );
         account.pay(1_000);
 
-        Assertions.assertEquals(2_000, account.getBalance());
+        assertEquals(2_000, account.getBalance());
     }
 
     @Test
@@ -185,7 +191,7 @@ public class CreditAccountTest {
         );
         account.pay(10_000);
 
-        Assertions.assertEquals(3_000, account.getBalance());
+        assertEquals(3_000, account.getBalance());
     }
 
     @Test
@@ -197,19 +203,22 @@ public class CreditAccountTest {
         );
         account.pay(-1_000);
 
-        Assertions.assertEquals(3_000, account.getBalance());
+        assertEquals(3_000, account.getBalance());
     }
 
     @Test
     public void shouldYearChangeNegativeBalance() {
-        CreditAccount account = new CreditAccount(
-                -3_000,
-                5_000,
-                15
-        );
-        account.yearChange();
+        try {
+            CreditAccount account = new CreditAccount(
+                    -3_000,
+                    5_000,
+                    15
+            );
+            account.yearChange();
+            Assertions.fail("IllegalArgumentException not thrown");
+        } catch (IllegalArgumentException expected) {
 
-        Assertions.assertEquals(-450, account.yearChange());
+        }
     }
 
     @Test
@@ -221,7 +230,7 @@ public class CreditAccountTest {
         );
         account.yearChange();
 
-        Assertions.assertEquals(0, account.yearChange());
+        assertEquals(0, account.yearChange());
     }
 
     @Test
@@ -233,6 +242,6 @@ public class CreditAccountTest {
         );
         account.yearChange();
 
-        Assertions.assertEquals(0, account.yearChange());
+        assertEquals(0, account.yearChange());
     }
 }
